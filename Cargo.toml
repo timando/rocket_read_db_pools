@@ -1,5 +1,5 @@
 [package]
-name = "read_db_pools"
+name = "rocket_read_db_pools"
 version = "0.1.0"
 edition = "2021"
 authors = ["Tim Anderson <crates@timando.net>"]
