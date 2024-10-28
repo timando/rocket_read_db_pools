@@ -2,6 +2,11 @@
 name = "read_db_pools"
 version = "0.1.0"
 edition = "2021"
+authors = ["Tim Anderson <crates@timando.net>"]
+description = "Rocket read-only / read-write async database pooling support"
+repository = "https://github.com/timando/rocket_read_db_pools"
+license = "MIT OR Apache-2.0"
+keywords = ["rocket", "framework", "database", "pools"]
 
 [dependencies.rocket]
 version = "0.5"
@@ -9,3 +14,4 @@ default-features = false
 
 [dependencies.rocket_db_pools]
 version = ">=0.1.0, <0.3"
+default-features = false
