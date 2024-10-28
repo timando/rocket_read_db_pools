@@ -1,0 +1,11 @@
+[package]
+name = "read_db_pools"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies.rocket]
+version = "0.5"
+default-features = false
+
+[dependencies.rocket_db_pools]
+version = ">=0.1.0, <0.3"
