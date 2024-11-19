@@ -1,6 +1,6 @@
 [package]
 name = "rocket_read_db_pools"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 authors = ["Tim Anderson <crates@timando.net>"]
 description = "Rocket read-only / read-write async database pooling support"
@@ -15,3 +15,8 @@ default-features = false
 [dependencies.rocket_db_pools]
 version = ">=0.1.0, <0.3"
 default-features = false
+
+[dependencies.rocket_okapi]
+version = ">= 0.8, <0.10"
+default-features = false
+optional = true

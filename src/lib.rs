@@ -171,3 +171,22 @@ impl<D: Database> DerefMut for RwConnection<D> {
         &mut self.0.0
     }
 }
+
+#[cfg(feature="rocket_okapi")]
+mod okapi{
+    use super::*;
+    use rocket_okapi::request::OpenApiFromRequest;
+    use rocket_okapi::gen::OpenApiGenerator;
+    use rocket_okapi::request::RequestHeaderInput;
+    use rocket_okapi::OpenApiError;
+    impl<'r, D: Database> OpenApiFromRequest<'r> for ReadConnection<D> where D::Pool: PoolRead {
+        fn from_request_input(_gen: &mut OpenApiGenerator, _name: String, _required: bool) -> Result<RequestHeaderInput, OpenApiError> {
+            Ok(RequestHeaderInput::None)
+        }
+    }
+    impl<'r, D: Database> OpenApiFromRequest<'r> for RwConnection<D> {
+        fn from_request_input(_gen: &mut OpenApiGenerator, _name: String, _required: bool) -> Result<RequestHeaderInput, OpenApiError> {
+            Ok(RequestHeaderInput::None)
+        }
+    }
+}
