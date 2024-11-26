@@ -115,6 +115,20 @@ impl<D: Database> DerefMut for ReadConnection<D> {
         &mut self.0
     }
 }
+impl<D: Database> ReadConnection<D> {
+    ///Provided for symmetry with RwConnection
+    pub fn into_read_connection(self) -> ReadConnection<D>{
+        self
+    }
+    ///Provided for symmetry with RwConnection
+    pub fn as_read_connection(&self) -> &ReadConnection<D>{
+        self
+    }
+    ///Provided for symmetry with RwConnection
+    pub fn as_read_connection_mut(&mut self) -> &mut ReadConnection<D>{
+        self
+    }
+}
 
 /// A request guard which retrieves a single connection to a [`Database`] using the main connection url.
 /// Can be downgraded into a `ReadConnection`
