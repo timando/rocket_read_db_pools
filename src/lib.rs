@@ -9,7 +9,7 @@ use rocket::async_trait;
 ///Internal trait so the FromRequest implementation can match `ReadPool` databases
 #[async_trait]
 trait PoolRead: Pool{
-    ///Gets a connection from the read pool if given else the main pool
+    ///Gets a connection from the read pool if configured else the main pool
     async fn get_read(&self) -> Result<Self::Connection, Self::Error>;
 }
 
@@ -129,6 +129,12 @@ impl<D: Database> ReadConnection<D> {
         self
     }
 }
+#[allow(private_bounds)]
+impl<D: Database> ReadConnection<D> where D::Pool: PoolRead {
+    pub async fn from_pool(pool: &D) -> Result<Self, <D::Pool as Pool>::Error>{
+        Ok(ReadConnection(pool.get_read().await?))
+    }
+}
 
 /// A request guard which retrieves a single connection to a [`Database`] using the main connection url.
 /// Can be downgraded into a `ReadConnection`
@@ -152,6 +158,11 @@ impl<D: Database> RwConnection<D> {
     ///Temporarily downgrades into a `ReadConnection`
     pub fn as_read_connection_mut(&mut self) -> &mut ReadConnection<D>{
         &mut self.0
+    }
+}
+impl<D: Database> RwConnection<D>{
+    pub async fn from_pool(pool: &D) -> Result<Self, <D::Pool as Pool>::Error>{
+        Ok(RwConnection(ReadConnection(pool.get().await?)))
     }
 }
 #[rocket::async_trait]

@@ -1,6 +1,6 @@
 [package]
 name = "rocket_read_db_pools"
-version = "0.1.2"
+version = "0.1.3"
 edition = "2021"
 authors = ["Tim Anderson <crates@timando.net>"]
 description = "Rocket read-only / read-write async database pooling support"
