@@ -34,6 +34,7 @@ trait PoolRead: Pool{
 ///url = "postgresql://user@readreplica.example/dbname"
 ///max_connections = 10
 ///```
+#[derive(Debug, Clone)]
 pub struct ReadPool<P>{
     main: P,
     read: Option<P>,
